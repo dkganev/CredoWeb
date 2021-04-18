@@ -23,30 +23,7 @@ class HospitalsController extends Controller
     }
     
     public function Index() {
-//        $dataTypes = [
-//            1 => ['ID' => 1, 'name' => 'patient'],
-//            2 => ['ID' => 2, 'name' => 'doctor'],
-//        ];
-        //$dataHospitals = 'test';
         $dataHospitals = Hospitals::orderBy('ID')->get();
-    
-        //$dataUsers = Users::orderBy('ID')->get();
-        
-//        $dataUsers = DB::table('Users')->
-//                select(
-//                    'Users.ID',
-//                    'Users.first_name',
-//                    'Users.last_name',
-//                    'Users.email',
-//                    DB::raw("(CASE
-//                        WHEN Users.type = 1 THEN 'patient'
-//                        WHEN Users.type = 2 THEN 'doctor'
-//                        ELSE ''
-//                    END) as type"),
-//                    'Users.created_at',
-//                    'Users.workplace_id',
-//                    'hospitals.name')->
-//                leftJoin('hospitals', function ($leftJoin) {$leftJoin->on('hospitals.ID', '=', 'Users.workplace_id');})->orderBy('Users.ID')->get();
         
 	return view('CredoWeb.hospitals',[
             'dataLink' => 'Hospitals', 
@@ -97,6 +74,15 @@ class HospitalsController extends Controller
         $responseSQL = Hospitals::create($addData);
         
         return [ 'success'=>1,'requestData'=>$addData, 'responseSQL' => $responseSQL]; 
+    }
+    
+    public function openViewHospitalsForm(Request $request) {
+        $addData = array();
+        $hospitalID = $request->input('hospitalID');
+        
+        $responseSQL = Hospitals::where('ID', $hospitalID)->first();
+        
+        return [ 'success'=>1,'requestData'=>$responseSQL];
     }
     
     public function openEditHospitalsForm(Request $request) {

@@ -42,7 +42,8 @@
                         <td class="text-right">{{ $dataHospital->address }}</td>
                         <td class="text-right">{{ $dataHospital->phone }}</td>
                         <td class="text-center">
-                                <button type="button" onclick='openEditHospitalForm({{ $dataHospital->ID }})' class="btn btn-success" data-dismiss="edit">Edit <i class="fa fa-edit"></i></button>
+                                <button type="button" onclick='openViewHospitalForm({{ $dataHospital->ID }})' class="btn btn-success" data-dismiss="edit">View <i class="fa fa-eye"></i></button>
+                                <button type="button" onclick='openEditHospitalForm({{ $dataHospital->ID }})' class="btn btn-info" data-dismiss="edit">Edit <i class="fa fa-edit"></i></button>
                                 <button type="button" onclick='deleteHospital({{ $dataHospital->ID }})'class="btn btn-danger" data-dismiss="delete">Delete <i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
@@ -53,5 +54,6 @@
     </div>
         
     @include('CredoWeb.Hospitals.addHospitals',  [])
+    @include('CredoWeb.Hospitals.viewHospitals', [])
     @include('CredoWeb.Hospitals.editHospitals', [])
 </x-layout>

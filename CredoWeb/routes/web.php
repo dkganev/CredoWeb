@@ -22,9 +22,13 @@ use App\Models\Task;
 
 
 //CredoWeb Users
+Route::get('/',[UsersController::class, 'Index']);
+
 Route::get('/users',[UsersController::class, 'Index'])->name('CredoWebUsers');
 
 Route::post('/addUser', [UsersController::class, 'addUser']);
+
+Route::post('/openViewUserForm', [UsersController::class, 'openViewUserForm']);
 
 Route::post('/openEditUserForm', [UsersController::class, 'openEditUserForm']);
 
@@ -36,6 +40,8 @@ Route::post('/deleteUser', [UsersController::class, 'deleteUser']);
 Route::get('/hospitals',[HospitalsController::class, 'Index']);
 
 Route::post('/addHospitals', [HospitalsController::class, 'addHospitals']);
+
+Route::post('/openViewHospitalsForm', [HospitalsController::class, 'openViewHospitalsForm']);
 
 Route::post('/openEditHospitalsForm', [HospitalsController::class, 'openEditHospitalsForm']);
 

@@ -48,7 +48,8 @@
                         <td class="text-right">{{ $dataUser->name }}</td>
                         <td class="text-right">{{ $dataUser->created_at }}</td>
                         <td class="text-center">
-                                <button type="button" onclick='openEditUserForm({{ $dataUser->ID }})' class="btn btn-success" data-dismiss="edit">Edit <i class="fa fa-edit"></i></button>
+                                <button type="button" onclick='openViewUserForm({{ $dataUser->ID }})' class="btn btn-success" data-dismiss="view">View <i class="fa fa-eye"></i></button>
+                                <button type="button" onclick='openEditUserForm({{ $dataUser->ID }})' class="btn btn-info" data-dismiss="edit">Edit <i class="fa fa-edit"></i></button>
                                 <button type="button" onclick='deleteUser({{ $dataUser->ID }})'class="btn btn-danger" data-dismiss="delete">Delete <i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
@@ -58,6 +59,7 @@
 
     </div>
 @include('CredoWeb.Users.addUsers',  ['dataTypes' => $dataTypes, 'dataHospitals' => $dataHospitals])
+@include('CredoWeb.Users.viewUsers', ['dataTypes' => $dataTypes, 'dataHospitals' => $dataHospitals])
 @include('CredoWeb.Users.editUsers', ['dataTypes' => $dataTypes, 'dataHospitals' => $dataHospitals])
     
 </x-layout>

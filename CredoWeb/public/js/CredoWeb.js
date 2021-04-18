@@ -66,6 +66,53 @@ function addUser() {
     });
 }
 
+function openViewUserForm(userID) {
+    
+    postData = {
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        userID: userID,
+    } 
+    $.ajax({
+        url: "/openViewUserForm",
+        type:"POST",
+	dataType: 'JSON',
+        data:postData,
+        success:function(response){
+            //console.log(response.requestData);
+            if(response.success == 1) {
+                $("#viewModal").modal();
+                data = response.requestData
+                $( "#viewModal input[name='first_name']" ).val(data.first_name);
+                $( "#viewModal input[name='first_name']" ).attr('readonly', true);
+                $( "#viewModal input[name='last_name']" ).val(data.last_name);
+                $( "#viewModal input[name='last_name']" ).attr('readonly', true);
+                $( "#viewModal input[name='email']" ).val(data.email);
+                $( "#viewModal input[name='email']" ).attr('readonly', true);
+                $( "#viewModal select[name='type']" ).val(data.type);
+                if (data.type == 2) {
+                    $( "#viewModal div[name='hospital" ).show();
+                }
+                else{
+                    $( "#viewModal div[name='hospital" ).hide();
+                }
+                $( "#viewModal select[name='type']" ).attr('readonly', true);
+                $( "#viewModal select[name='type']" ).prop("disabled", true);
+                $( "#viewModal select[name='workplace_id']" ).val(data.workplace_id);
+                $( "#viewModal select[name='workplace_id']" ).attr('readonly', true);
+                $( "#viewModal select[name='workplace_id']" ).prop("disabled", true);
+            }
+            else{
+                //alert(response.error);
+            }
+        },
+	error:function(response){
+            console.log('error',response);
+            if(response) {
+            }
+        },
+    });
+}
+
 function openEditUserForm(userID) {
     
     postData = {
@@ -187,6 +234,41 @@ function addHospitals() {
         },
 	error:function(response){
             //console.log('error',response);
+            if(response) {
+            }
+        },
+    });
+}
+
+function openViewHospitalForm(hospitalID) {
+    
+    postData = {
+        _token: $('meta[name="csrf-token"]').attr('content'),
+        hospitalID: hospitalID,
+    } 
+    $.ajax({
+        url: "/openViewHospitalsForm",
+        type:"POST",
+	dataType: 'JSON',
+        data:postData,
+        success:function(response){
+            //console.log(response.requestData);
+            if(response.success == 1) {
+                $("#viewModal").modal();
+                data = response.requestData
+                $( "#viewModal input[name='name']" ).val(data.name);
+                $( "#viewModal input[name='name']" ).attr('readonly', true);
+                $( "#viewModal input[name='address']" ).val(data.address);
+                $( "#viewModal input[name='address']" ).attr('readonly', true);
+                $( "#viewModal input[name='phone']" ).val(data.phone);
+                $( "#viewModal input[name='phone']" ).attr('readonly', true);
+            }
+            else{
+                //alert(response.error);
+            }
+        },
+	error:function(response){
+            console.log('error',response);
             if(response) {
             }
         },

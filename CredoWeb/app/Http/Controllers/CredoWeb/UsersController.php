@@ -117,6 +117,15 @@ class UsersController extends Controller
         return [ 'success'=>1,'requestData'=>$addData, 'responseSQL' => $responseSQL]; 
     }
     
+    public function openViewUserForm(Request $request) {
+        $addData = array();
+        $userID = $request->input('userID');
+        
+        $responseSQL = Users::where('ID', $userID)->first();
+        
+        return [ 'success'=>1,'requestData'=>$responseSQL];
+    }
+    
     public function openEditUserForm(Request $request) {
         $addData = array();
         $userID = $request->input('userID');
